@@ -6,6 +6,7 @@ import "./App.css";
 import { Route, Switch, Link } from "react-router-dom";
 import PollAdmin from "./components/PollAdmin/PollAdmin";
 import PollQuestion from "./components/PollQuestion/PollQuestion";
+import Modal from "./components/Modal";
 
 import "react-animated-slider/build/horizontal.css";
 
@@ -13,9 +14,7 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			user: {
-				name: ""
-			},
+			userName: "",
 
 			polls: [
 				{
@@ -45,9 +44,20 @@ class App extends Component {
 				}
 			],
 			show: false,
-			err: ""
+			err: "",
+			showModal: false
 		};
 	}
+	setUserName = (field, name) => {
+		this.setState({ [field]: name, showModal: false });
+	};
+
+	logout = () => {
+		this.setState({ userName: "" });
+	};
+	toggleModal = () => {
+		this.setState({ showModal: !this.state.showModal });
+	};
 	handleQuestion = e => {
 		console.log(e.target.value);
 		this.setState({ [e.target.name]: e.target.value });
@@ -88,8 +98,12 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<NavBar />
-				<h1>Sir Poll-a-lot</h1>
+				<NavBar
+					userName={this.state.userName}
+					toggleModal={this.toggleModal}
+					logout={this.logout}
+				/>
+				<h1>{this.state.userName} Sir Poll-a-lot</h1>
 				<aside className="menu">
 					<ul className="menu-list">
 						<p class="menu-label">Polls</p>
@@ -136,6 +150,12 @@ class App extends Component {
 							)}
 						/>
 					</Switch>
+
+					<Modal
+						setUserName={this.setUserName}
+						showModal={this.state.showModal}
+						toggleModal={this.toggleModal}
+					/>
 				</main>
 			</div>
 		);

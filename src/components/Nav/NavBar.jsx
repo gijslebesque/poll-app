@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = props => {
+const NavBar = ({ toggleModal, userName, logout }) => {
+	debugger;
 	return (
 		<nav>
 			<div className="navbar-menu">
@@ -22,7 +23,16 @@ const NavBar = props => {
 				<div class="navbar-end">
 					<div className="navbar-item">
 						<div className="buttons">
-							<p className="button is-light">Log in</p>
+							{userName && (
+								<p className="button is-light" onClick={logout}>
+									Logout
+								</p>
+							)}
+							{!userName && (
+								<p className="button is-light" onClick={toggleModal}>
+									Log in
+								</p>
+							)}
 						</div>
 					</div>
 				</div>
