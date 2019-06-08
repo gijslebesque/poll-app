@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Form from "./Form.jsx";
+import Form from "./Form";
 
 const Modal = ({ toggleModal, setUserName }) => {
 	const [name, setName] = useState("");

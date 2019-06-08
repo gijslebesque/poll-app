@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PollAnswers from "../PollAnswers/PollAnswers";
 import PropTypes from "prop-types";
+import Section from "../Section";
+import Form from "../Form";
 
 class PollQuestions extends Component {
 	constructor(props) {
@@ -8,24 +10,43 @@ class PollQuestions extends Component {
 		this.state = {
 			style: {
 				transform: "translate(100%)"
+			},
+			poll: {
+				question: "",
+				answers: []
 			}
 		};
 	}
 	componentDidMount() {
-		setTimeout(this.mountStyle, 10); // call the into animation
+		// call the animation
+		this.showPoll();
+		setTimeout(this.mountStyle, 10);
 	}
+
+	componentDidUpdate(prevProps) {
+		const {
+			match: {
+				params: { id }
+			}
+		} = this.props;
+		debugger;
+		if (prevProps.match.params.id !== id) {
+			debugger;
+			this.showPoll();
+		}
+	}
+
 	mountStyle = () => {
 		// css for mount animation
 		this.setState({
 			style: {
 				transform: "translate(0%)",
-
 				transition: "all 0.5s ease"
 			}
 		});
 	};
 	unMountStyle = () => {
-		// css for mount animation
+		// css for unmount animation
 		this.setState({
 			style: {
 				transform: "translate(100%)",
@@ -34,27 +55,54 @@ class PollQuestions extends Component {
 		});
 	};
 
-	clickNextHandler = () => {
-		this.unMountStyle();
-		setTimeout(this.props.clickNextHandler, 100);
+	vote = () => {
+		// this.unMountStyle();
+		// setTimeout(this.props.clickNextHandler, 100);
 	};
+
+	showPoll = () => {
+		console.log(this.props);
+		const {
+			match: {
+				params: { id }
+			},
+			polls
+		} = this.props;
+
+		const poll = polls.filter((poll, i) => {
+			return i === parseInt(id);
+		});
+
+		if (!poll[0]) {
+			this.props.history.push("/");
+			return;
+		}
+		this.setState({ poll: poll[0] });
+	};
+
 	render() {
+		const { poll } = this.state;
+
 		return (
 			<div className="wrapper" style={this.state.style}>
-				<section className="moveIn">
-					{this.props.children}
-					<form action="">
-						{this.props.answers.map(answer => {
-							return (
-								<div>
-									<input type="radio" name="question" />
-									<label htmlFor={answer.name}>{answer.value}</label>
-								</div>
-							);
-						})}
-					</form>
-					<button onClick={e => this.clickNextHandler(e)}>Next</button>
-				</section>
+				<Section title={poll.question} subtitle={`asked by ${poll.owner}`}>
+					<Form name="Answers">
+						{poll &&
+							poll.answers.map(answer => {
+								return (
+									<div>
+										<label className="radio">
+											<input type="radio" name="answer" />
+											{answer.value}
+										</label>
+									</div>
+								);
+							})}
+					</Form>
+					<button className="button" onClick={e => this.vote(e)}>
+						Vote!
+					</button>
+				</Section>
 				<PollAnswers
 					pollQuestion={this.state.pollQuestion}
 					answers={this.state.answers}

@@ -8,6 +8,7 @@ main {
 	display: inline-block;
 }
 aside {
+	padding: 3rem 0;
 	width: 20%;
 }
 main {
@@ -30,4 +31,11 @@ h1 {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+
+.notification {
+	position: fixed;
+	top: 40px;
+	right: 40px;
+	transition: 1s all;
 }

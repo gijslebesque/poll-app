@@ -8,6 +8,7 @@ import PollAdmin from "./components/PollAdmin/PollAdmin";
 import PollQuestion from "./components/PollQuestion/PollQuestion";
 import Modal from "./components/Modal";
 import Section from "./components/Section";
+import history from "./history";
 
 class App extends Component {
 	constructor() {
@@ -29,17 +30,6 @@ class App extends Component {
 							value: "Two"
 						}
 					]
-				}
-			],
-			question: "Pose a question",
-			answers: [
-				{
-					name: 0,
-					value: ""
-				},
-				{
-					name: 0,
-					value: ""
 				}
 			],
 			show: false,
@@ -67,6 +57,7 @@ class App extends Component {
 		poll.owner = this.state.userName ? this.state.userName : "Anonymous";
 		newPolls.push(poll);
 		this.setState({ polls: newPolls });
+		history.push(`/poll/${newPolls.length - 1}`);
 	};
 
 	render() {
@@ -84,11 +75,11 @@ class App extends Component {
 					<div className="flex-container">
 						<aside className="menu">
 							<ul className="menu-list">
-								<p class="menu-label">Polls</p>
+								<p className="menu-label">Polls</p>
 								{this.state.polls.map((poll, i) => {
 									return (
-										<li>
-											<Link className="menu-label" key={i} to={`/poll/${i}`}>
+										<li key={i}>
+											<Link className="menu-label" to={`/poll/${i}`}>
 												{`${i + 1}. ${poll.question} by ${poll.owner}`}
 											</Link>
 										</li>
@@ -105,6 +96,7 @@ class App extends Component {
 									render={props => (
 										<PollAdmin
 											{...props}
+											userName={this.state.userName}
 											addPoll={this.addPoll}
 											handleQuestion={this.handleQuestion}
 											addQuestion={this.addQuestion}
@@ -123,7 +115,7 @@ class App extends Component {
 											{...props}
 											show={this.state.show}
 											pollQuestion={this.state.pollQuestion}
-											answers={this.state.answers}
+											polls={this.state.polls}
 											clickNextHandler={this.clickNextHandler}
 										/>
 									)}

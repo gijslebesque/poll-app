@@ -9,12 +9,9 @@
     "bulma": "^0.7.5",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-animated-slider": "^1.1.4",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "react-transition-group": "^4.1.0",
-    "react-vis": "^1.11.7"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

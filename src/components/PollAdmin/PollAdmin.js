@@ -1,15 +1,17 @@
 import React, { Component } from "react";
+import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 import Form from "../Form.jsx";
 import Section from "../Section";
 import Notification from "../Notification";
+const notificationRoot = document.getElementById("notification-root");
 
 class PollAdmin extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			style: {
-				transform: "translate(-100%)",
+				transform: "translate(100%)",
 				transition: "all 1s ease"
 			},
 			poll: {
@@ -24,7 +26,8 @@ class PollAdmin extends Component {
 						value: ""
 					}
 				]
-			}
+			},
+			notAllowedNotification: false
 		};
 	}
 
@@ -60,20 +63,14 @@ class PollAdmin extends Component {
 	};
 
 	handleQuestion = e => {
-		console.log(e.target.value);
-		debugger;
 		const poll = { ...this.state.poll };
 		poll.question = e.target.value;
 		this.setState({ poll });
-		// this.setState(prevState => ({
-		// 	poll: { ...prevState.poll, question: e.target.value }
-		// }));
 	};
 
-	addQuestion = e => {
-		if (this.state.poll.answers.length >= 10) return false;
-		e.preventDefault();
-		var newInput = {
+	addQuestion = () => {
+		if (this.state.poll.answers.length >= 10) return;
+		const newInput = {
 			name: this.state.poll.answers.length,
 			value: ""
 		};
@@ -98,21 +95,47 @@ class PollAdmin extends Component {
 		}));
 	};
 
-	deleteInput = (e, i) => {
-		e.preventDefault();
-		if (this.state.answers.length <= 2) return false;
-		const answers = [...this.state.answers];
+	deleteInput = i => {
+		const answers = [...this.state.poll.answers];
 		answers.splice(i, 1);
-		this.setState({ answers });
+		this.setState(prevState => ({ poll: { ...prevState.poll, answers } }));
 	};
 
+	showNotAllowed = () => {
+		if (this.state.notAllowedNotification) return;
+		this.setState({ notAllowedNotification: true });
+		setTimeout(() => this.setState({ notAllowedNotification: false }), 3000);
+	};
+
+	addPoll = () => {
+		const answers = this.state.poll.answers;
+		debugger;
+
+		for (let i = answers.length - 1; i > 0; i--) {
+			if (!answers[i].value) {
+				debugger;
+				this.showNotAllowed();
+
+				return;
+			}
+		}
+
+		if (this.state.poll.answers.length < 2 || !this.state.poll.question) {
+			this.showNotAllowed();
+		} else {
+			this.props.addPoll(this.state.poll);
+		}
+	};
 	render() {
+		const disabled =
+			this.state.poll.answers.length >= 10 ? { disabled: "disabled" } : "";
 		return (
 			<Section
 				style={this.state.style}
 				title="Create your poll"
 				subtitle="Fill in a question and add up to 10 possible answers to it."
 			>
+				<h3>Question</h3>
 				<Form>
 					<input
 						className="input"
@@ -122,7 +145,7 @@ class PollAdmin extends Component {
 						onChange={e => this.handleQuestion(e)}
 					/>
 				</Form>
-
+				<h3>Answers</h3>
 				{this.state.poll.answers.map((input, i) => (
 					<Form>
 						<div className="flex-container" key={i}>
@@ -138,7 +161,7 @@ class PollAdmin extends Component {
 							/>
 							<button
 								className="button is-link"
-								onClick={e => this.deleteInput(e, i)}
+								onClick={() => this.deleteInput(i)}
 							>
 								Delete
 							</button>
@@ -146,16 +169,30 @@ class PollAdmin extends Component {
 					</Form>
 				))}
 
-				<button className="button" onClick={e => this.addQuestion(e)}>
+				<button className="button" onClick={this.addQuestion} {...disabled}>
 					Add an answer
 				</button>
-				<button
-					className="button"
-					onClick={e => this.props.addPoll(this.state.poll)}
-				>
+
+				<button className="button" onClick={this.addPoll}>
 					Add your poll
 				</button>
-				<Notification type="is-warning" />
+				{!this.props.userName &&
+					createPortal(
+						<Notification
+							type="is-warning"
+							text="You are currently not logged in. You can still create a poll, but it can be edited by anyone. Please login to make it personal."
+						/>,
+						notificationRoot
+					)}
+
+				{this.state.notAllowedNotification &&
+					createPortal(
+						<Notification
+							type="is-danger"
+							text="You need to add at least two answers. And a question."
+						/>,
+						notificationRoot
+					)}
 			</Section>
 		);
 	}
