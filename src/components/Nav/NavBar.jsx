@@ -1,8 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = ({ toggleModal, userName, logout }) => {
-	debugger;
+const NavBar = memo(({ toggleModal, userName, logout }) => {
 	return (
 		<nav>
 			<div className="navbar-menu">
@@ -39,6 +38,6 @@ const NavBar = ({ toggleModal, userName, logout }) => {
 			</div>
 		</nav>
 	);
-};
+});
 
 export default NavBar;

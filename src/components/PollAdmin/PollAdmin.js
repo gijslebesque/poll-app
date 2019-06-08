@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Form from "../Form.jsx";
+import Section from "../Section";
+import Notification from "../Notification";
 
 class PollAdmin extends Component {
 	constructor(props) {
@@ -8,6 +11,19 @@ class PollAdmin extends Component {
 			style: {
 				transform: "translate(-100%)",
 				transition: "all 1s ease"
+			},
+			poll: {
+				question: "",
+				answers: [
+					{
+						name: 0,
+						value: ""
+					},
+					{
+						name: 0,
+						value: ""
+					}
+				]
 			}
 		};
 	}
@@ -43,40 +59,104 @@ class PollAdmin extends Component {
 		});
 	};
 
+	handleQuestion = e => {
+		console.log(e.target.value);
+		debugger;
+		const poll = { ...this.state.poll };
+		poll.question = e.target.value;
+		this.setState({ poll });
+		// this.setState(prevState => ({
+		// 	poll: { ...prevState.poll, question: e.target.value }
+		// }));
+	};
+
+	addQuestion = e => {
+		if (this.state.poll.answers.length >= 10) return false;
+		e.preventDefault();
+		var newInput = {
+			name: this.state.poll.answers.length,
+			value: ""
+		};
+		this.setState(prevState => ({
+			poll: {
+				...prevState.poll,
+				answers: prevState.poll.answers.concat([newInput])
+			}
+		}));
+	};
+
+	changeQuestion = (e, i) => {
+		e.preventDefault();
+		const answers = [...this.state.poll.answers];
+		answers[i].value = e.target.value;
+
+		this.setState(prevState => ({
+			poll: {
+				...prevState.poll,
+				answers: answers
+			}
+		}));
+	};
+
+	deleteInput = (e, i) => {
+		e.preventDefault();
+		if (this.state.answers.length <= 2) return false;
+		const answers = [...this.state.answers];
+		answers.splice(i, 1);
+		this.setState({ answers });
+	};
+
 	render() {
 		return (
-			<section style={this.state.style}>
-				<form>
+			<Section
+				style={this.state.style}
+				title="Create your poll"
+				subtitle="Fill in a question and add up to 10 possible answers to it."
+			>
+				<Form>
 					<input
+						className="input"
 						type="text"
 						placeholder="What do you want to poll?"
 						name="question"
-						onChange={e => this.props.handleQuestion(e)}
+						onChange={e => this.handleQuestion(e)}
 					/>
-				</form>
-				<form>
-					{this.props.answers.map((input, i) => (
-						<div key={i}>
+				</Form>
+
+				{this.state.poll.answers.map((input, i) => (
+					<Form>
+						<div className="flex-container" key={i}>
 							<input
+								className="input"
 								type="text"
+								placeholder="Provide an answer"
 								name={input.name}
 								value={input.value}
 								onChange={e => {
-									this.props.changeQuestion(e, i);
+									this.changeQuestion(e, i);
 								}}
 							/>
-							<button onClick={e => this.props.deleteInput(e, i)}>
+							<button
+								className="button is-link"
+								onClick={e => this.deleteInput(e, i)}
+							>
 								Delete
 							</button>
 						</div>
-					))}
-				</form>
+					</Form>
+				))}
 
-				<button onClick={e => this.props.addQuestion(e)}>
-					CLICK ME TO ADD AN INPUT
+				<button className="button" onClick={e => this.addQuestion(e)}>
+					Add an answer
 				</button>
-				<button onClick={e => this.clickNextHandler(e)}>Next</button>
-			</section>
+				<button
+					className="button"
+					onClick={e => this.props.addPoll(this.state.poll)}
+				>
+					Add your poll
+				</button>
+				<Notification type="is-warning" />
+			</Section>
 		);
 	}
 }
