@@ -14,7 +14,8 @@ class PollQuestions extends Component {
 			poll: {
 				question: "",
 				answers: []
-			}
+			},
+			answers: []
 		};
 	}
 	componentDidMount() {
@@ -29,9 +30,8 @@ class PollQuestions extends Component {
 				params: { id }
 			}
 		} = this.props;
-		debugger;
+
 		if (prevProps.match.params.id !== id) {
-			debugger;
 			this.showPoll();
 		}
 	}
@@ -79,29 +79,36 @@ class PollQuestions extends Component {
 		}
 		this.setState({ poll: poll[0] });
 	};
+	handleRadioBtn = e => {};
 
 	render() {
 		const { poll } = this.state;
-
+		console.log(this.state.answers);
 		return (
 			<div className="wrapper" style={this.state.style}>
 				<Section title={poll.question} subtitle={`asked by ${poll.owner}`}>
 					<Form name="Answers">
 						{poll &&
-							poll.answers.map(answer => {
+							poll.answers.map((answer, i) => {
 								return (
-									<div>
+									<div key={i}>
 										<label className="radio">
-											<input type="radio" name="answer" />
+											<input
+												type="radio"
+												name="answer"
+												data-index={i + 1}
+												value={answer.value}
+												onChange={e => this.handleRadioBtn(e)}
+											/>
 											{answer.value}
 										</label>
 									</div>
 								);
 							})}
+						<button className="button" onClick={e => this.vote(e)}>
+							Vote!
+						</button>
 					</Form>
-					<button className="button" onClick={e => this.vote(e)}>
-						Vote!
-					</button>
 				</Section>
 				<PollAnswers
 					pollQuestion={this.state.pollQuestion}

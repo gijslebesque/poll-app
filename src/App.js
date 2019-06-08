@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../node_modules/react-vis/dist/style.css";
 import "bulma/css/bulma.css";
 import NavBar from "./components/Nav/NavBar";
 import "./App.css";
