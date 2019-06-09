@@ -98,7 +98,6 @@ class PollQuestions extends Component {
 
 	render() {
 		const { poll } = this.state;
-		console.log(this.state.answers);
 		return (
 			<div className="wrapper" style={this.state.style}>
 				<Section title={poll.question} subtitle={`asked by ${poll.owner}`}>
@@ -113,7 +112,7 @@ class PollQuestions extends Component {
 											checked={this.state.checked === i}
 											data-index={i}
 											value={answer.value}
-											onClick={e => this.handleRadioBtn(e)}
+											onChange={e => this.handleRadioBtn(e)}
 										/>
 										{answer.value}
 									</label>
@@ -125,20 +124,14 @@ class PollQuestions extends Component {
 						</button>
 					</Form>
 				</Section>
-				<PollAnswers
-					pollQuestion={this.state.pollQuestion}
-					userAnswers={this.state.userAnswers}
-				/>
+				<PollAnswers userAnswers={this.state.userAnswers} />
 			</div>
 		);
 	}
 }
 
 PollQuestions.propTypes = {
-	show: PropTypes.bool.isRequired,
-	pollQuestion: PropTypes.func.isRequired,
-	answers: PropTypes.array.isRequired,
-	children: PropTypes.any
+	polls: PropTypes.array.isRequired
 };
 
 export default PollQuestions;

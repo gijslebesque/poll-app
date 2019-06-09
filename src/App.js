@@ -31,8 +31,7 @@ class App extends Component {
 					]
 				}
 			],
-			show: false,
-			err: "",
+
 			showModal: false
 		};
 	}
@@ -47,9 +46,6 @@ class App extends Component {
 		this.setState({ showModal: !this.state.showModal });
 	};
 
-	clickNextHandler = () => {
-		this.setState({ show: !this.state.show });
-	};
 	addPoll = poll => {
 		debugger;
 		const newPolls = [...this.state.polls];
@@ -110,13 +106,7 @@ class App extends Component {
 									exact
 									path="/poll/:id"
 									render={props => (
-										<PollQuestion
-											{...props}
-											show={this.state.show}
-											pollQuestion={this.state.pollQuestion}
-											polls={this.state.polls}
-											clickNextHandler={this.clickNextHandler}
-										/>
+										<PollQuestion {...props} polls={this.state.polls} />
 									)}
 								/>
 							</Switch>
