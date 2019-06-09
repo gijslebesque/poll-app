@@ -8,6 +8,7 @@ class PollQuestions extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			checked: "",
 			style: {
 				transform: "translate(100%)"
 			},
@@ -15,7 +16,7 @@ class PollQuestions extends Component {
 				question: "",
 				answers: []
 			},
-			answers: []
+			userAnswers: []
 		};
 	}
 	componentDidMount() {
@@ -56,12 +57,16 @@ class PollQuestions extends Component {
 	};
 
 	vote = () => {
-		// this.unMountStyle();
-		// setTimeout(this.props.clickNextHandler, 100);
+		const updatedUserAnswers = this.state.userAnswers.map((answer, i) => {
+			if (i === this.state.checked) {
+				answer.voted++;
+			}
+			return answer;
+		});
+		this.setState({ userAnswers: updatedUserAnswers, checked: "" });
 	};
 
 	showPoll = () => {
-		console.log(this.props);
 		const {
 			match: {
 				params: { id }
@@ -77,9 +82,19 @@ class PollQuestions extends Component {
 			this.props.history.push("/");
 			return;
 		}
-		this.setState({ poll: poll[0] });
+		const userAnswers = poll[0].answers.map((answer, i) => {
+			return {
+				name: `Answer ${i + 1}`,
+				voted: 0
+			};
+		});
+
+		this.setState({ poll: poll[0], userAnswers });
 	};
-	handleRadioBtn = e => {};
+	handleRadioBtn = e => {
+		const indexBtn = parseInt(e.target.getAttribute("data-index"));
+		this.setState({ checked: indexBtn });
+	};
 
 	render() {
 		const { poll } = this.state;
@@ -88,23 +103,23 @@ class PollQuestions extends Component {
 			<div className="wrapper" style={this.state.style}>
 				<Section title={poll.question} subtitle={`asked by ${poll.owner}`}>
 					<Form name="Answers">
-						{poll &&
-							poll.answers.map((answer, i) => {
-								return (
-									<div key={i}>
-										<label className="radio">
-											<input
-												type="radio"
-												name="answer"
-												data-index={i + 1}
-												value={answer.value}
-												onChange={e => this.handleRadioBtn(e)}
-											/>
-											{answer.value}
-										</label>
-									</div>
-								);
-							})}
+						{poll.answers.map((answer, i) => {
+							return (
+								<div key={i}>
+									<label className="radio">
+										<input
+											type="radio"
+											name="answer"
+											checked={this.state.checked === i}
+											data-index={i}
+											value={answer.value}
+											onClick={e => this.handleRadioBtn(e)}
+										/>
+										{answer.value}
+									</label>
+								</div>
+							);
+						})}
 						<button className="button" onClick={e => this.vote(e)}>
 							Vote!
 						</button>
@@ -112,7 +127,7 @@ class PollQuestions extends Component {
 				</Section>
 				<PollAnswers
 					pollQuestion={this.state.pollQuestion}
-					answers={this.state.answers}
+					userAnswers={this.state.userAnswers}
 				/>
 			</div>
 		);

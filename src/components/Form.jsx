@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 const Form = ({ children, name, icons }) => {
 	return (
-		<form className="field">
+		<div className="field">
 			<label className="label">{name}</label>
 			<div className={`control ${icons}`}>{children}</div>
-		</form>
+		</div>
 	);
 };
 
