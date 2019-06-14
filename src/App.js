@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import "bulma/css/bulma.css";
-import NavBar from "./components/Nav/NavBar";
+import NavBar from "./components/NavBar";
 import "./App.css";
-import { Route, Switch, Link } from "react-router-dom";
-import PollAdmin from "./components/PollAdmin/PollAdmin";
-import PollQuestion from "./components/PollQuestion/PollQuestion";
+import { Route, Switch } from "react-router-dom";
+import PollAdmin from "./components/PollAdmin";
+import PollQuestion from "./components/PollQuestion";
 import Modal from "./components/Modal";
-import Section from "./components/Section";
 import history from "./history";
+import Menu from "./components/Menu";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
+import ErrorBoundry from "./components/ErrorBoundry";
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
 			userName: "",
-
+			showModal: false,
 			polls: [
 				{
 					owner: "Gijs",
@@ -22,37 +25,51 @@ class App extends Component {
 					answers: [
 						{
 							name: 0,
-							value: "One"
+							value:
+								"One Sint magna officia commodo sint quis cupidatat veniam dolore cillum labore reprehenderit."
 						},
 						{
 							name: 0,
 							value: "Two"
+						},
+						{
+							name: 0,
+							value: "Three"
 						}
 					]
 				}
-			],
-
-			showModal: false
+			]
 		};
 	}
+
+	getPoll = id => {
+		const stateCopy = [...this.state.polls];
+		debugger;
+		return stateCopy.splice(id, 1);
+	};
 	setUserName = (field, name) => {
 		this.setState({ [field]: name, showModal: false });
 	};
 
 	logout = () => {
 		this.setState({ userName: "" });
+		history.push("/");
 	};
 	toggleModal = () => {
 		this.setState({ showModal: !this.state.showModal });
 	};
 
-	addPoll = poll => {
-		debugger;
+	addPoll = (poll, id) => {
 		const newPolls = [...this.state.polls];
 		poll.owner = this.state.userName ? this.state.userName : "Anonymous";
-		newPolls.push(poll);
+		if (id) {
+			newPolls[id] = poll;
+			history.push(`/poll/${id}`);
+		} else {
+			newPolls.push(poll);
+			history.push(`/poll/${newPolls.length - 1}`);
+		}
 		this.setState({ polls: newPolls });
-		history.push(`/poll/${newPolls.length - 1}`);
 	};
 
 	render() {
@@ -63,52 +80,43 @@ class App extends Component {
 					toggleModal={this.toggleModal}
 					logout={this.logout}
 				/>
-				<Section
-					title={`${this.state.userName} Sir Poll-a-lot`}
-					subtitle="Poll some"
-				>
-					<div className="flex-container">
-						<aside className="menu">
-							<ul className="menu-list">
-								<p className="menu-label">Polls</p>
-								{this.state.polls.map((poll, i) => {
-									return (
-										<li key={i}>
-											<Link className="menu-label" to={`/poll/${i}`}>
-												{`${i + 1}. ${poll.question} by ${poll.owner}`}
-											</Link>
-										</li>
-									);
-								})}
-							</ul>
-						</aside>
-
-						<main>
+				<>
+					<header>
+						<h1> {`Sir ${this.state.userName} Poll-a-lot`} </h1>
+						<h2>Poll some</h2>
+					</header>
+					<div className="columns">
+						<div className="column">
+							<Menu polls={this.state.polls} />
+						</div>
+						<div className="column is-four-fifths">
 							<Switch>
+								<Route exact path="/" component={Home} />
 								<Route
-									exact
-									path="/create-poll"
+									path="/create-poll/:id?"
 									render={props => (
-										<PollAdmin
-											{...props}
-											userName={this.state.userName}
-											addPoll={this.addPoll}
-											handleQuestion={this.handleQuestion}
-											addQuestion={this.addQuestion}
-											answers={this.state.answers}
-											changeQuestion={this.changeQuestion}
-											deleteInput={this.deleteInput}
-											clickNextHandler={this.clickNextHandler}
-										/>
+										<ErrorBoundry>
+											<PollAdmin
+												{...props}
+												getPoll={this.getPoll}
+												userName={this.state.userName}
+												addPoll={this.addPoll}
+											/>
+										</ErrorBoundry>
 									)}
 								/>
 								<Route
 									exact
 									path="/poll/:id"
 									render={props => (
-										<PollQuestion {...props} polls={this.state.polls} />
+										<PollQuestion
+											{...props}
+											userName={this.state.userName}
+											polls={this.state.polls}
+										/>
 									)}
 								/>
+								<Route path="/*" component={NotFound} />
 							</Switch>
 							{this.state.showModal && (
 								<Modal
@@ -116,9 +124,9 @@ class App extends Component {
 									toggleModal={this.toggleModal}
 								/>
 							)}
-						</main>
+						</div>
 					</div>
-				</Section>
+				</>
 			</div>
 		);
 	}

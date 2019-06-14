@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import Form from "../Form.jsx";
-import Section from "../Section";
-import Notification from "../Notification";
-const notificationRoot = document.getElementById("notification-root");
+import Form from "./Form.jsx";
+import Section from "./Section";
+import Notification from "./Notification";
 
 class PollAdmin extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			edit: false,
+			hasError: false,
 			style: {
 				transform: "translate(100%)",
 				transition: "all 1s ease"
@@ -29,10 +29,45 @@ class PollAdmin extends Component {
 			},
 			notAllowedNotification: false
 		};
+		this.el = document.createElement("div");
+		this.el.id = "notification-root";
 	}
 
+	isEdit = () => {
+		console.log(this.props);
+		debugger;
+		const id = this.props.match.params.id;
+		if (id) {
+			const poll = this.props.getPoll(id);
+			debugger;
+			if (
+				poll[0].owner === this.props.userName ||
+				poll[0].owner === "Anonymous"
+			)
+				this.setState({ poll: poll[0], edit: true });
+		}
+	};
+
 	componentDidMount() {
+		// const appRoot = document.getElementById("root");
+		// appRoot.prepend(this.el);
 		setTimeout(this.mountStyle, 10);
+		this.isEdit();
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.userName !== this.props.userName) {
+			this.isEdit();
+		}
+	}
+	static getDerivedStateFromError(error) {
+		// Update state so the next render will show the fallback UI.
+		return { hasError: true };
+	}
+
+	componentWillUnmount() {
+		// const appRoot = document.getElementById("root");
+		// appRoot.removeChild(this.el);
 	}
 
 	clickNextHandler = e => {
@@ -109,13 +144,10 @@ class PollAdmin extends Component {
 
 	addPoll = () => {
 		const answers = this.state.poll.answers;
-		debugger;
 
 		for (let i = answers.length - 1; i > 0; i--) {
 			if (!answers[i].value) {
-				debugger;
 				this.showNotAllowed();
-
 				return;
 			}
 		}
@@ -123,88 +155,94 @@ class PollAdmin extends Component {
 		if (this.state.poll.answers.length < 2 || !this.state.poll.question) {
 			this.showNotAllowed();
 		} else {
-			this.props.addPoll(this.state.poll);
+			const id = this.props.match.params.id;
+			this.props.addPoll(this.state.poll, id);
 		}
 	};
 	render() {
+		const copy = this.state.edit ? "Edit" : "Add";
+
 		const disabled =
 			this.state.poll.answers.length >= 10 ? { disabled: "disabled" } : "";
 		return (
-			<Section
-				style={this.state.style}
-				title="Create your poll"
-				subtitle="Fill in a question and add up to 10 possible answers to it."
-			>
-				<h3>Question</h3>
-				<Form>
-					<input
-						className="input"
-						type="text"
-						placeholder="What do you want to poll?"
-						name="question"
-						onChange={e => this.handleQuestion(e)}
-					/>
-				</Form>
-				<h3>Answers</h3>
-				{this.state.poll.answers.map((input, i) => (
+			<>
+				{this.state.hasError && <h1>An error occured</h1>}
+				<Section
+					style={this.state.style}
+					title={`${copy} your poll`}
+					subtitle="Enter a question and add up to 10 possible answers."
+				>
+					<h3>Question</h3>
 					<Form>
-						<div className="flex-container" key={i}>
-							<input
-								className="input"
-								type="text"
-								placeholder="Provide an answer"
-								name={input.name}
-								value={input.value}
-								onChange={e => {
-									this.changeQuestion(e, i);
-								}}
-							/>
-							<button
-								className="button is-link"
-								onClick={() => this.deleteInput(i)}
-							>
-								Delete
-							</button>
-						</div>
+						<input
+							className="input"
+							type="text"
+							placeholder="What do you want to poll?"
+							name="question"
+							value={this.state.poll.question}
+							onChange={e => this.handleQuestion(e)}
+						/>
 					</Form>
-				))}
+					<h3>Answers</h3>
+					{this.state.poll.answers.map((input, i) => (
+						<Form key={i}>
+							<div className="flex-container" key={i}>
+								<input
+									className="input"
+									type="text"
+									placeholder="Provide an answer"
+									name={input.name}
+									value={input.value}
+									onChange={e => {
+										this.changeQuestion(e, i);
+									}}
+								/>
+								<button
+									className="button is-link"
+									onClick={() => this.deleteInput(i)}
+								>
+									Delete
+								</button>
+							</div>
+						</Form>
+					))}
 
-				<button className="button" onClick={this.addQuestion} {...disabled}>
-					Add an answer
-				</button>
+					<button
+						className="button is-outlined is-primary"
+						onClick={this.addQuestion}
+						{...disabled}
+					>
+						Add an answer
+					</button>
 
-				<button className="button" onClick={this.addPoll}>
-					Add your poll
-				</button>
-				{!this.props.userName &&
-					createPortal(
+					<button className="button is-primary" onClick={this.addPoll}>
+						{`${copy} your poll`}
+					</button>
+
+					<p>{this.state.poll.answers.length}/10 possible answers.</p>
+					{!this.props.userName && (
 						<Notification
 							type="is-warning"
 							text="You are currently not logged in. You can still create a poll, but it can be edited by anyone. Please login to make it personal."
-						/>,
-						notificationRoot
+						/>
 					)}
 
-				{this.state.notAllowedNotification &&
-					createPortal(
+					{this.state.notAllowedNotification && (
 						<Notification
 							type="is-danger"
 							text="You need to add at least two answers. And a question."
-						/>,
-						notificationRoot
+						/>
 					)}
-			</Section>
+				</Section>
+			</>
 		);
 	}
 }
 
 PollAdmin.propTypes = {
-	clickNextHandler: PropTypes.func.isRequired,
-	handleQuestion: PropTypes.func.isRequired,
-	answers: PropTypes.array.isRequired,
-	changeQuestion: PropTypes.func.isRequired,
-	deleteInput: PropTypes.func.isRequired,
-	addQuestion: PropTypes.func.isRequired
+	getPoll: PropTypes.func.isRequired,
+	addPoll: PropTypes.func.isRequired,
+	userName: PropTypes.string.isRequired
 };
 
 export default PollAdmin;

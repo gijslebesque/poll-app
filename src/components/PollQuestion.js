@@ -1,22 +1,23 @@
 import React, { Component } from "react";
-import PollAnswers from "../PollAnswers/PollAnswers";
+import PollAnswers from "./PollChart";
 import PropTypes from "prop-types";
-import Section from "../Section";
-import Form from "../Form";
+import Section from "./Section";
+import Form from "./Form.jsx";
 
 class PollQuestions extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			checked: "",
+			showEditModal: false,
+			userAnswers: [],
 			style: {
 				transform: "translate(100%)"
 			},
 			poll: {
 				question: "",
 				answers: []
-			},
-			userAnswers: []
+			}
 		};
 	}
 	componentDidMount() {
@@ -59,20 +60,24 @@ class PollQuestions extends Component {
 	vote = () => {
 		const updatedUserAnswers = this.state.userAnswers.map((answer, i) => {
 			if (i === this.state.checked) {
-				answer.voted++;
+				answer.vote++;
 			}
 			return answer;
 		});
 		this.setState({ userAnswers: updatedUserAnswers, checked: "" });
 	};
-
+	reset = () => {
+		this.showPoll();
+	};
+	edit = () => {
+		this.props.history.push({
+			pathname: `/create-poll/${this.props.match.params.id}`,
+			poll: this.state.poll
+		});
+	};
 	showPoll = () => {
-		const {
-			match: {
-				params: { id }
-			},
-			polls
-		} = this.props;
+		const id = this.props.match.params.id;
+		const polls = this.props.polls;
 
 		const poll = polls.filter((poll, i) => {
 			return i === parseInt(id);
@@ -85,7 +90,7 @@ class PollQuestions extends Component {
 		const userAnswers = poll[0].answers.map((answer, i) => {
 			return {
 				name: `Answer ${i + 1}`,
-				voted: 0
+				vote: 0
 			};
 		});
 
@@ -99,32 +104,47 @@ class PollQuestions extends Component {
 	render() {
 		const { poll } = this.state;
 		return (
-			<div className="wrapper" style={this.state.style}>
+			<div style={this.state.style}>
 				<Section title={poll.question} subtitle={`asked by ${poll.owner}`}>
-					<Form name="Answers">
-						{poll.answers.map((answer, i) => {
-							return (
-								<div key={i}>
-									<label className="radio">
-										<input
-											type="radio"
-											name="answer"
-											checked={this.state.checked === i}
-											data-index={i}
-											value={answer.value}
-											onChange={e => this.handleRadioBtn(e)}
-										/>
-										{answer.value}
-									</label>
-								</div>
-							);
-						})}
-						<button className="button" onClick={e => this.vote(e)}>
-							Vote!
-						</button>
-					</Form>
+					<div className="columns">
+						<div className="column">
+							<Form name="Answers">
+								{poll.answers.map((answer, i) => {
+									return (
+										<div className="control" key={i}>
+											<label className="radio">
+												<input
+													type="radio"
+													name="answer"
+													checked={this.state.checked === i}
+													data-index={i}
+													value={answer.value}
+													onChange={e => this.handleRadioBtn(e)}
+												/>
+												{answer.value}
+											</label>
+										</div>
+									);
+								})}
+								<button className="button is-primary" onClick={this.vote}>
+									Vote!
+								</button>
+								<button className="button is-primary" onClick={this.reset}>
+									Reset
+								</button>
+								{(this.state.poll.owner === this.props.userName ||
+									this.state.poll.owner === "Anonymous") && (
+									<button className="button is-primary" onClick={this.edit}>
+										edit
+									</button>
+								)}
+							</Form>
+						</div>
+						<div className="column">
+							<PollAnswers userAnswers={this.state.userAnswers} />
+						</div>
+					</div>
 				</Section>
-				<PollAnswers userAnswers={this.state.userAnswers} />
 			</div>
 		);
 	}
@@ -132,6 +152,10 @@ class PollQuestions extends Component {
 
 PollQuestions.propTypes = {
 	polls: PropTypes.array.isRequired
+};
+
+PollQuestions.defaultProps = {
+	polls: []
 };
 
 export default PollQuestions;

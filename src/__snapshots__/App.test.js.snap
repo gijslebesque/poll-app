@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Router App should render correctly 1`] = `ShallowWrapper {}`;
+
+exports[`Router Router should render correctly 1`] = `
+initialize {
+  "options": Object {
+    "decodeEntities": true,
+    "normalizeWhitespace": false,
+    "withDomLvl1": true,
+    "xml": false,
+  },
+}
+`;

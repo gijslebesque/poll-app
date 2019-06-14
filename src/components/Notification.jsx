@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, memo, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import PropTypes from "prop-types";
+const appRoot = document.getElementById("root");
 
-const Notification = ({ type, text }) => {
+const Notification = memo(({ type, text }) => {
+	const notificationEl = useRef(null);
 	const [showNotification, toggleNotification] = useState(true);
-	const [style, unMountStyle] = useState({});
-	setTimeout(() => unMountStyle({ transform: "translateX(110%)" }), 2000);
 
-	return (
+	useEffect(() => {
+		console.log(notificationEl.current);
+
+		setTimeout(() => {
+			if (notificationEl.current) {
+				notificationEl.current.style = "transform: translateX(120%)";
+			}
+		}, 2000);
+	});
+
+	return createPortal(
 		<>
 			{showNotification && (
-				<div style={style} className={`notification ${type}`}>
+				<div
+					style={{ transform: "translateX(0%)" }}
+					ref={notificationEl}
+					className={`notification ${type}`}
+				>
 					<button
 						className="delete"
 						onClick={() => toggleNotification(false)}
@@ -16,8 +32,14 @@ const Notification = ({ type, text }) => {
 					{text}
 				</div>
 			)}
-		</>
+		</>,
+		appRoot
 	);
+});
+
+Notification.propTypes = {
+	type: PropTypes.string.isRequired,
+	text: PropTypes.string.isRequired
 };
 
 export default Notification;
