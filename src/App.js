@@ -44,7 +44,6 @@ class App extends Component {
 
 	getPoll = id => {
 		const stateCopy = [...this.state.polls];
-		debugger;
 		return stateCopy.splice(id, 1);
 	};
 	setUserName = (field, name) => {
@@ -60,16 +59,23 @@ class App extends Component {
 	};
 
 	addPoll = (poll, id) => {
-		const newPolls = [...this.state.polls];
+		const polls = [...this.state.polls];
 		poll.owner = this.state.userName ? this.state.userName : "Anonymous";
 		if (id) {
-			newPolls[id] = poll;
+			polls[id] = poll;
 			history.push(`/poll/${id}`);
 		} else {
-			newPolls.push(poll);
-			history.push(`/poll/${newPolls.length - 1}`);
+			polls.push(poll);
+			history.push(`/poll/${polls.length - 1}`);
 		}
-		this.setState({ polls: newPolls });
+		this.setState({ polls });
+	};
+
+	deletePoll = index => {
+		const polls = [...this.state.polls];
+		polls.splice(parseInt(index), 1);
+		this.setState({ polls });
+		history.push("/");
 	};
 
 	render() {
@@ -101,6 +107,7 @@ class App extends Component {
 												getPoll={this.getPoll}
 												userName={this.state.userName}
 												addPoll={this.addPoll}
+												deletePoll={this.deletePoll}
 											/>
 										</ErrorBoundry>
 									)}

@@ -43,6 +43,7 @@ nav {
 	right: 20px;
 	max-width: 250px;
 	transition: 1s all;
+	z-index: 9999;
 }
 .is-primary {
 	margin: 20px 20px 20px 0px;

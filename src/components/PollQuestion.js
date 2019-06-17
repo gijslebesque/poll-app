@@ -126,7 +126,11 @@ class PollQuestions extends Component {
 										</div>
 									);
 								})}
-								<button className="button is-primary" onClick={this.vote}>
+								<button
+									id="vote"
+									className="button is-primary"
+									onClick={this.vote}
+								>
 									Vote!
 								</button>
 								<button className="button is-primary" onClick={this.reset}>

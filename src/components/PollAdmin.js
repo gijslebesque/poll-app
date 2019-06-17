@@ -9,7 +9,6 @@ class PollAdmin extends Component {
 		super(props);
 		this.state = {
 			edit: false,
-			hasError: false,
 			style: {
 				transform: "translate(100%)",
 				transition: "all 1s ease"
@@ -29,28 +28,21 @@ class PollAdmin extends Component {
 			},
 			notAllowedNotification: false
 		};
-		this.el = document.createElement("div");
-		this.el.id = "notification-root";
 	}
 
 	isEdit = () => {
-		console.log(this.props);
-		debugger;
 		const id = this.props.match.params.id;
 		if (id) {
 			const poll = this.props.getPoll(id);
-			debugger;
 			if (
-				poll[0].owner === this.props.userName ||
-				poll[0].owner === "Anonymous"
+				poll[0] &&
+				(poll[0].owner === this.props.userName || poll[0].owner === "Anonymous")
 			)
 				this.setState({ poll: poll[0], edit: true });
 		}
 	};
 
 	componentDidMount() {
-		// const appRoot = document.getElementById("root");
-		// appRoot.prepend(this.el);
 		setTimeout(this.mountStyle, 10);
 		this.isEdit();
 	}
@@ -59,15 +51,6 @@ class PollAdmin extends Component {
 		if (prevProps.userName !== this.props.userName) {
 			this.isEdit();
 		}
-	}
-	static getDerivedStateFromError(error) {
-		// Update state so the next render will show the fallback UI.
-		return { hasError: true };
-	}
-
-	componentWillUnmount() {
-		// const appRoot = document.getElementById("root");
-		// appRoot.removeChild(this.el);
 	}
 
 	clickNextHandler = e => {
@@ -166,7 +149,6 @@ class PollAdmin extends Component {
 			this.state.poll.answers.length >= 10 ? { disabled: "disabled" } : "";
 		return (
 			<>
-				{this.state.hasError && <h1>An error occured</h1>}
 				<Section
 					style={this.state.style}
 					title={`${copy} your poll`}
@@ -175,6 +157,7 @@ class PollAdmin extends Component {
 					<h3>Question</h3>
 					<Form>
 						<input
+							tabIndex="1"
 							className="input"
 							type="text"
 							placeholder="What do you want to poll?"
@@ -188,6 +171,7 @@ class PollAdmin extends Component {
 						<Form key={i}>
 							<div className="flex-container" key={i}>
 								<input
+									tabIndex={i + 2}
 									className="input"
 									type="text"
 									placeholder="Provide an answer"
@@ -219,6 +203,15 @@ class PollAdmin extends Component {
 						{`${copy} your poll`}
 					</button>
 
+					{this.state.edit && (
+						<button
+							className="button is-primary"
+							onClick={() => this.props.deletePoll(this.props.match.params.id)}
+						>
+							Delete this poll
+						</button>
+					)}
+
 					<p>{this.state.poll.answers.length}/10 possible answers.</p>
 					{!this.props.userName && (
 						<Notification
@@ -242,6 +235,7 @@ class PollAdmin extends Component {
 PollAdmin.propTypes = {
 	getPoll: PropTypes.func.isRequired,
 	addPoll: PropTypes.func.isRequired,
+	deletePoll: PropTypes.func.isRequired,
 	userName: PropTypes.string.isRequired
 };
 

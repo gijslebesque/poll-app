@@ -77,6 +77,7 @@ initialize {
                                     Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -145,9 +146,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Object {
@@ -195,6 +198,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -213,9 +217,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -263,6 +269,7 @@ initialize {
                                         "prev": Object {
                                           "attribs": Object {
                                             "class": "button is-primary",
+                                            "id": "vote",
                                           },
                                           "children": Array [
                                             Object {
@@ -281,9 +288,11 @@ initialize {
                                           "type": "tag",
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "tag",
@@ -334,6 +343,7 @@ initialize {
                                   Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -402,9 +412,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Object {
@@ -452,6 +464,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -470,9 +483,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",
@@ -520,6 +535,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -538,9 +554,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -961,6 +979,7 @@ initialize {
                                       Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -1029,9 +1048,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       Object {
@@ -1079,6 +1100,7 @@ initialize {
                                         "prev": Object {
                                           "attribs": Object {
                                             "class": "button is-primary",
+                                            "id": "vote",
                                           },
                                           "children": Array [
                                             Object {
@@ -1097,9 +1119,11 @@ initialize {
                                           "type": "tag",
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "tag",
@@ -1147,6 +1171,7 @@ initialize {
                                           "prev": Object {
                                             "attribs": Object {
                                               "class": "button is-primary",
+                                              "id": "vote",
                                             },
                                             "children": Array [
                                               Object {
@@ -1165,9 +1190,11 @@ initialize {
                                             "type": "tag",
                                             "x-attribsNamespace": Object {
                                               "class": undefined,
+                                              "id": undefined,
                                             },
                                             "x-attribsPrefix": Object {
                                               "class": undefined,
+                                              "id": undefined,
                                             },
                                           },
                                           "type": "tag",
@@ -1218,6 +1245,7 @@ initialize {
                                     Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -1286,9 +1314,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Object {
@@ -1336,6 +1366,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -1354,9 +1385,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -1404,6 +1437,7 @@ initialize {
                                         "prev": Object {
                                           "attribs": Object {
                                             "class": "button is-primary",
+                                            "id": "vote",
                                           },
                                           "children": Array [
                                             Object {
@@ -1422,9 +1456,11 @@ initialize {
                                           "type": "tag",
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "tag",
@@ -1605,6 +1641,7 @@ initialize {
                                   Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -1673,9 +1710,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Object {
@@ -1723,6 +1762,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -1741,9 +1781,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",
@@ -1791,6 +1833,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -1809,9 +1852,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -1862,6 +1907,7 @@ initialize {
                                 Object {
                                   "attribs": Object {
                                     "class": "button is-primary",
+                                    "id": "vote",
                                   },
                                   "children": Array [
                                     Object {
@@ -1930,9 +1976,11 @@ initialize {
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Object {
@@ -1980,6 +2028,7 @@ initialize {
                                   "prev": Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -1998,9 +2047,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "tag",
@@ -2048,6 +2099,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -2066,9 +2118,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",
@@ -2489,6 +2543,7 @@ initialize {
                                     Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -2557,9 +2612,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     Object {
@@ -2607,6 +2664,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -2625,9 +2683,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -2675,6 +2735,7 @@ initialize {
                                         "prev": Object {
                                           "attribs": Object {
                                             "class": "button is-primary",
+                                            "id": "vote",
                                           },
                                           "children": Array [
                                             Object {
@@ -2693,9 +2754,11 @@ initialize {
                                           "type": "tag",
                                           "x-attribsNamespace": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                           "x-attribsPrefix": Object {
                                             "class": undefined,
+                                            "id": undefined,
                                           },
                                         },
                                         "type": "tag",
@@ -2746,6 +2809,7 @@ initialize {
                                   Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -2814,9 +2878,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Object {
@@ -2864,6 +2930,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -2882,9 +2949,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",
@@ -2932,6 +3001,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -2950,9 +3020,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -3125,6 +3197,7 @@ initialize {
                                 Object {
                                   "attribs": Object {
                                     "class": "button is-primary",
+                                    "id": "vote",
                                   },
                                   "children": Array [
                                     Object {
@@ -3193,9 +3266,11 @@ initialize {
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Object {
@@ -3243,6 +3318,7 @@ initialize {
                                   "prev": Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -3261,9 +3337,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "tag",
@@ -3311,6 +3389,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -3329,9 +3408,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",
@@ -3382,6 +3463,7 @@ initialize {
                               Object {
                                 "attribs": Object {
                                   "class": "button is-primary",
+                                  "id": "vote",
                                 },
                                 "children": Array [
                                   Object {
@@ -3450,9 +3532,11 @@ initialize {
                                 "type": "tag",
                                 "x-attribsNamespace": Object {
                                   "class": undefined,
+                                  "id": undefined,
                                 },
                                 "x-attribsPrefix": Object {
                                   "class": undefined,
+                                  "id": undefined,
                                 },
                               },
                               Object {
@@ -3500,6 +3584,7 @@ initialize {
                                 "prev": Object {
                                   "attribs": Object {
                                     "class": "button is-primary",
+                                    "id": "vote",
                                   },
                                   "children": Array [
                                     Object {
@@ -3518,9 +3603,11 @@ initialize {
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 "type": "tag",
@@ -3568,6 +3655,7 @@ initialize {
                                   "prev": Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -3586,9 +3674,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "tag",
@@ -4009,6 +4099,7 @@ initialize {
                                   Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -4077,9 +4168,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   Object {
@@ -4127,6 +4220,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -4145,9 +4239,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",
@@ -4195,6 +4291,7 @@ initialize {
                                       "prev": Object {
                                         "attribs": Object {
                                           "class": "button is-primary",
+                                          "id": "vote",
                                         },
                                         "children": Array [
                                           Object {
@@ -4213,9 +4310,11 @@ initialize {
                                         "type": "tag",
                                         "x-attribsNamespace": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                         "x-attribsPrefix": Object {
                                           "class": undefined,
+                                          "id": undefined,
                                         },
                                       },
                                       "type": "tag",
@@ -4266,6 +4365,7 @@ initialize {
                                 Object {
                                   "attribs": Object {
                                     "class": "button is-primary",
+                                    "id": "vote",
                                   },
                                   "children": Array [
                                     Object {
@@ -4334,9 +4434,11 @@ initialize {
                                   "type": "tag",
                                   "x-attribsNamespace": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                   "x-attribsPrefix": Object {
                                     "class": undefined,
+                                    "id": undefined,
                                   },
                                 },
                                 Object {
@@ -4384,6 +4486,7 @@ initialize {
                                   "prev": Object {
                                     "attribs": Object {
                                       "class": "button is-primary",
+                                      "id": "vote",
                                     },
                                     "children": Array [
                                       Object {
@@ -4402,9 +4505,11 @@ initialize {
                                     "type": "tag",
                                     "x-attribsNamespace": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                     "x-attribsPrefix": Object {
                                       "class": undefined,
+                                      "id": undefined,
                                     },
                                   },
                                   "type": "tag",
@@ -4452,6 +4557,7 @@ initialize {
                                     "prev": Object {
                                       "attribs": Object {
                                         "class": "button is-primary",
+                                        "id": "vote",
                                       },
                                       "children": Array [
                                         Object {
@@ -4470,9 +4576,11 @@ initialize {
                                       "type": "tag",
                                       "x-attribsNamespace": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                       "x-attribsPrefix": Object {
                                         "class": undefined,
+                                        "id": undefined,
                                       },
                                     },
                                     "type": "tag",

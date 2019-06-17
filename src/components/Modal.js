@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Form from "./Form";
 
 const Modal = ({ toggleModal, setUserName }) => {
 	const [name, setName] = useState("");
+	const input = useRef(null);
+	useEffect(() => {
+		input.current.focus();
+	}, []);
 
 	return (
 		<div className={`modal is-active`}>
@@ -12,6 +16,7 @@ const Modal = ({ toggleModal, setUserName }) => {
 			<div className="modal-content">
 				<Form label="Username" icons="has-icons-left">
 					<input
+						ref={input}
 						className="input is-success"
 						type="text"
 						name="userName"
