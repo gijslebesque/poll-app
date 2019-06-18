@@ -42,4 +42,9 @@ Notification.propTypes = {
 	text: PropTypes.string.isRequired
 };
 
+Notification.defaultProps = {
+	type: "",
+	text: ""
+};
+
 export default Notification;

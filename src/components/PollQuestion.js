@@ -19,7 +19,12 @@ class PollQuestions extends Component {
 				answers: []
 			}
 		};
+		this.handleRadioBtn = this.handleRadioBtn.bind(this);
+		this.vote = this.vote.bind(this);
+		this.reset = this.reset.bind(this);
+		this.edit = this.edit.bind(this);
 	}
+
 	componentDidMount() {
 		// call the animation
 		this.showPoll();
@@ -66,15 +71,18 @@ class PollQuestions extends Component {
 		});
 		this.setState({ userAnswers: updatedUserAnswers, checked: "" });
 	};
-	reset = () => {
+
+	reset() {
 		this.showPoll();
-	};
-	edit = () => {
+	}
+
+	edit() {
 		this.props.history.push({
 			pathname: `/create-poll/${this.props.match.params.id}`,
 			poll: this.state.poll
 		});
-	};
+	}
+
 	showPoll = () => {
 		const id = this.props.match.params.id;
 		const polls = this.props.polls;
@@ -87,6 +95,7 @@ class PollQuestions extends Component {
 			this.props.history.push("/");
 			return;
 		}
+
 		const userAnswers = poll[0].answers.map((answer, i) => {
 			return {
 				name: `Answer ${i + 1}`,
@@ -96,10 +105,11 @@ class PollQuestions extends Component {
 
 		this.setState({ poll: poll[0], userAnswers });
 	};
-	handleRadioBtn = e => {
+
+	handleRadioBtn(e) {
 		const indexBtn = parseInt(e.target.getAttribute("data-index"));
 		this.setState({ checked: indexBtn });
-	};
+	}
 
 	render() {
 		const { poll } = this.state;
@@ -129,16 +139,24 @@ class PollQuestions extends Component {
 								<button
 									id="vote"
 									className="button is-primary"
-									onClick={this.vote}
+									onClick={() => this.vote()}
 								>
 									Vote!
 								</button>
-								<button className="button is-primary" onClick={this.reset}>
+								<button
+									id="reset"
+									className="button is-primary"
+									onClick={() => this.reset()}
+								>
 									Reset
 								</button>
 								{(this.state.poll.owner === this.props.userName ||
 									this.state.poll.owner === "Anonymous") && (
-									<button className="button is-primary" onClick={this.edit}>
+									<button
+										id="edit"
+										className="button is-primary"
+										onClick={() => this.edit()}
+									>
 										edit
 									</button>
 								)}
@@ -155,11 +173,13 @@ class PollQuestions extends Component {
 }
 
 PollQuestions.propTypes = {
-	polls: PropTypes.array.isRequired
+	polls: PropTypes.array.isRequired,
+	userName: PropTypes.string.isRequired
 };
 
 PollQuestions.defaultProps = {
-	polls: []
+	polls: [],
+	userName: ""
 };
 
 export default PollQuestions;

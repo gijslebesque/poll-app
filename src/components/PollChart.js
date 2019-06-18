@@ -38,7 +38,7 @@ const PollAnswers = memo(({ userAnswers }) => {
 					<XAxis dataKey="name" />
 					<YAxis />
 					<Tooltip />
-					{votes && <Legend />}
+					<Legend />
 					<Bar dataKey="vote" fill="#b0e0e6" />
 				</BarChart>
 			</ResponsiveContainer>

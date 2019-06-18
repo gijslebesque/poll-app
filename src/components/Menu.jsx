@@ -25,4 +25,8 @@ Menu.propTypes = {
 	polls: PropTypes.array.isRequired
 };
 
+Menu.defaultProps = {
+	polls: []
+};
+
 export default Menu;

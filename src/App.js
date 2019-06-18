@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "bulma/css/bulma.css";
 import NavBar from "./components/NavBar";
-import "./App.css";
+import "./App.scss";
 import { Route, Switch } from "react-router-dom";
 import PollAdmin from "./components/PollAdmin";
 import PollQuestion from "./components/PollQuestion";
@@ -10,7 +10,6 @@ import history from "./history";
 import Menu from "./components/Menu";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-import ErrorBoundry from "./components/ErrorBoundry";
 
 class App extends Component {
 	constructor() {
@@ -101,15 +100,13 @@ class App extends Component {
 								<Route
 									path="/create-poll/:id?"
 									render={props => (
-										<ErrorBoundry>
-											<PollAdmin
-												{...props}
-												getPoll={this.getPoll}
-												userName={this.state.userName}
-												addPoll={this.addPoll}
-												deletePoll={this.deletePoll}
-											/>
-										</ErrorBoundry>
+										<PollAdmin
+											{...props}
+											getPoll={this.getPoll}
+											userName={this.state.userName}
+											addPoll={this.addPoll}
+											deletePoll={this.deletePoll}
+										/>
 									)}
 								/>
 								<Route
