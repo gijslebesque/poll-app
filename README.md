@@ -1,12 +1,12 @@
 ## General description
 
-This application is made for a technical assessment. Users can make polls with a minumum of 2 and maxumimum of 10 questions per poll. Users are able to edit the polls and the votes can be set back to 0.
+This application is made for a technical assessment. Users can make polls with a minumum of 2 and maximum of 10 questions per poll. Users are able to edit the polls and the votes can be set back to 0.
 
-Since the assignment stated that the application should function without backend, there is a very rudimental login system. If an user creates a poll without loggin in, the poll will be created under an 'anonymous' account. Polls created by Anonymous users can be editted by anyone. Polls created by 'logged in' users can be edited only by their creators.
+Since the assignment stated that the application should function without backend, there is a very rudimental (front-end) login system. If an user creates a poll without loggin in, the poll will be created under an 'anonymous' account. Polls created by Anonymous users can be editted by anyone. Polls created by 'logged in' users can be edited only by their creators.
 
 ## Technology
 
-The assignment states that the application should be a single page application (SPA). Therefore it has been made with React.js. React is an open source JavaScript library. React is chosen, because react is very lightweighted, modular by design and fast. Updatind and manipulation the DOM is one of the biggest bottlenecks in terms of performance. React uses a virtual DOM, an in memory copy of the DOM, in order to find the best way apply changes in the DOM. Because React is modular it will make future support and scaling up the application quick and cost efficient.
+The assignment states that the application should be a single page application (SPA). Therefore it has been made with React.js. React is an open source JavaScript library. React is chosen, because react is very lightweighted, modular by design and fast. Updating and manipulation the DOM is one of the biggest bottlenecks in terms of performance. React uses a virtual DOM, an in memory copy of the DOM, in order to find the best way apply changes in the DOM. Because React is modular it will make future support and scaling up the application quick and cost efficient.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
