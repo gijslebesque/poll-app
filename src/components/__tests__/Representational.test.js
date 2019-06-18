@@ -7,26 +7,26 @@ import NavBar from "../NavBar";
 import NotFound from "../NotFound";
 import Section from "../Section";
 
-import { render, shallow } from "enzyme";
+import { shallow } from "enzyme";
 
 describe("Representational components", () => {
 	it("Form should render correctly", () => {
-		const wrapper = render(<Form />);
+		const wrapper = shallow(<Form />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
 	it("Home should render correctly", () => {
-		const wrapper = render(<Home />);
+		const wrapper = shallow(<Home />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
 	it("Menu should render correctly", () => {
-		const wrapper = render(<Menu />);
+		const wrapper = shallow(<Menu />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
 	it("Modal should render correctly", () => {
-		const wrapper = render(<Modal />);
+		const wrapper = shallow(<Modal />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
@@ -41,12 +41,15 @@ describe("Representational components", () => {
 	});
 
 	it("NotFound should render correctly", () => {
-		const wrapper = render(<NotFound />);
+		const wrapper = shallow(<NotFound />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
 	it("Section should render correctly", () => {
-		const wrapper = render(<Section />);
+		const baseProps = {
+			title: ""
+		};
+		const wrapper = shallow(<Section {...baseProps} />);
 		expect(wrapper).toMatchSnapshot();
 	});
 });

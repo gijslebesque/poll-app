@@ -1,6 +1,6 @@
 import React from "react";
 import App from "./App";
-import { Router, Switch, Route, MemoryRouter } from "react-router-dom";
+import { Router, MemoryRouter } from "react-router-dom";
 import { shallow, mount, render } from "enzyme";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
@@ -32,16 +32,16 @@ describe("Router", () => {
 		expect(component.find(PollQuestion)).toHaveLength(0);
 		expect(component.find(NotFound)).toHaveLength(0);
 	});
-	it("PollQuestion should render correctly", () => {
+
+	it("PollQuestion should redirect to home correctly", () => {
 		const component = mount(
 			<MemoryRouter initialEntries={["/poll/0"]}>
 				<App />
 			</MemoryRouter>
 		);
-
-		expect(component.find(Home)).toHaveLength(0);
+		expect(component.find(Home)).toHaveLength(1);
 		expect(component.find(PollAdmin)).toHaveLength(0);
-		expect(component.find(PollQuestion)).toHaveLength(1);
+		expect(component.find(PollQuestion)).toHaveLength(0);
 		expect(component.find(NotFound)).toHaveLength(0);
 	});
 

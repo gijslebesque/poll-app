@@ -29,8 +29,15 @@ class PollAdmin extends Component {
 			notAllowedNotification: false
 		};
 
+		this.isEdit = this.isEdit.bind(this);
+		this.mountStyle = this.mountStyle.bind(this);
+		this.unMountStyle = this.unMountStyle.bind(this);
+		this.handleQuestion = this.handleQuestion.bind(this);
+		this.changeQuestion = this.changeQuestion.bind(this);
 		this.addAnswer = this.addAnswer.bind(this);
 		this.deleteAnswer = this.deleteAnswer.bind(this);
+		this.showNotAllowed = this.showNotAllowed.bind(this);
+		this.addPoll = this.addPoll.bind(this);
 	}
 
 	componentDidMount() {
@@ -44,7 +51,7 @@ class PollAdmin extends Component {
 		}
 	}
 
-	isEdit = () => {
+	isEdit() {
 		const id = this.props.match.params.id;
 		if (id) {
 			const poll = this.props.getPoll(id);
@@ -54,19 +61,20 @@ class PollAdmin extends Component {
 			)
 				this.setState({ poll: poll[0], edit: true });
 		}
-	};
+	}
 
-	mountStyle = () => {
+	mountStyle() {
+		// css for mounting animation
 		this.setState({
 			style: {
 				transform: "translate(0%)",
 				transition: "all 0.5s ease"
 			}
 		});
-	};
+	}
 
-	unMountStyle = () => {
-		// css for mount animation
+	unMountStyle() {
+		// css for unmounting animation
 		this.setState({
 			style: {
 				transform: "translate(-100%)",
@@ -74,15 +82,15 @@ class PollAdmin extends Component {
 				transition: "all 0.5s ease"
 			}
 		});
-	};
+	}
 
-	handleQuestion = e => {
+	handleQuestion(e) {
 		const poll = { ...this.state.poll };
 		poll.question = e.target.value;
 		this.setState({ poll });
-	};
+	}
 
-	changeQuestion = (e, i) => {
+	changeQuestion(e, i) {
 		e.preventDefault();
 		const answers = [...this.state.poll.answers];
 		answers[i].value = e.target.value;
@@ -93,7 +101,7 @@ class PollAdmin extends Component {
 				answers: answers
 			}
 		}));
-	};
+	}
 
 	addAnswer() {
 		if (this.state.poll.answers.length >= 10) return;
@@ -115,13 +123,13 @@ class PollAdmin extends Component {
 		this.setState(prevState => ({ poll: { ...prevState.poll, answers } }));
 	}
 
-	showNotAllowed = () => {
+	showNotAllowed() {
 		if (this.state.notAllowedNotification) return;
 		this.setState({ notAllowedNotification: true });
 		setTimeout(() => this.setState({ notAllowedNotification: false }), 3000);
-	};
+	}
 
-	addPoll = () => {
+	addPoll() {
 		const answers = this.state.poll.answers;
 
 		for (let i = answers.length - 1; i > 0; i--) {
@@ -137,13 +145,14 @@ class PollAdmin extends Component {
 			const id = this.props.match.params.id;
 			this.props.addPoll(this.state.poll, id);
 		}
-	};
+	}
 
 	render() {
 		const copy = this.state.edit ? "Edit" : "Add";
 
 		const disabled =
 			this.state.poll.answers.length >= 10 ? { disabled: "disabled" } : "";
+
 		return (
 			<Section
 				style={this.state.style}

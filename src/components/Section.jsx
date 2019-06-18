@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-const Section = ({ title, subtitle, children, style }) => {
+const Section = memo(({ title, subtitle, children, style }) => {
 	return (
 		<section className="section" style={style}>
 			<div className="container">
@@ -11,7 +11,7 @@ const Section = ({ title, subtitle, children, style }) => {
 			</div>
 		</section>
 	);
-};
+});
 
 Section.propTypes = {
 	title: PropTypes.string.isRequired,

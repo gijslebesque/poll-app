@@ -19,14 +19,19 @@ class PollQuestions extends Component {
 				answers: []
 			}
 		};
+
+		this.mountStyle = this.mountStyle.bind(this);
+		this.unMountStyle = this.unMountStyle.bind(this);
+
 		this.handleRadioBtn = this.handleRadioBtn.bind(this);
 		this.vote = this.vote.bind(this);
 		this.reset = this.reset.bind(this);
 		this.edit = this.edit.bind(this);
+		this.showPoll = this.showPoll.bind(this);
 	}
 
 	componentDidMount() {
-		// call the animation
+		// call the animation and populate poll
 		this.showPoll();
 		setTimeout(this.mountStyle, 10);
 	}
@@ -43,7 +48,7 @@ class PollQuestions extends Component {
 		}
 	}
 
-	mountStyle = () => {
+	mountStyle() {
 		// css for mount animation
 		this.setState({
 			style: {
@@ -51,8 +56,9 @@ class PollQuestions extends Component {
 				transition: "all 0.5s ease"
 			}
 		});
-	};
-	unMountStyle = () => {
+	}
+
+	unMountStyle() {
 		// css for unmount animation
 		this.setState({
 			style: {
@@ -60,9 +66,9 @@ class PollQuestions extends Component {
 				transition: "all 0.5s ease"
 			}
 		});
-	};
+	}
 
-	vote = () => {
+	vote() {
 		const updatedUserAnswers = this.state.userAnswers.map((answer, i) => {
 			if (i === this.state.checked) {
 				answer.vote++;
@@ -70,7 +76,7 @@ class PollQuestions extends Component {
 			return answer;
 		});
 		this.setState({ userAnswers: updatedUserAnswers, checked: "" });
-	};
+	}
 
 	reset() {
 		this.showPoll();
@@ -83,7 +89,7 @@ class PollQuestions extends Component {
 		});
 	}
 
-	showPoll = () => {
+	showPoll() {
 		const id = this.props.match.params.id;
 		const polls = this.props.polls;
 
@@ -104,7 +110,7 @@ class PollQuestions extends Component {
 		});
 
 		this.setState({ poll: poll[0], userAnswers });
-	};
+	}
 
 	handleRadioBtn(e) {
 		const indexBtn = parseInt(e.target.getAttribute("data-index"));

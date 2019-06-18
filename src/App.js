@@ -17,47 +17,34 @@ class App extends Component {
 		this.state = {
 			userName: "",
 			showModal: false,
-			polls: [
-				{
-					owner: "Gijs",
-					question: "Hello there how can I help you?",
-					answers: [
-						{
-							name: 0,
-							value:
-								"One Sint magna officia commodo sint quis cupidatat veniam dolore cillum labore reprehenderit."
-						},
-						{
-							name: 0,
-							value: "Two"
-						},
-						{
-							name: 0,
-							value: "Three"
-						}
-					]
-				}
-			]
+			polls: []
 		};
+
+		this.getPoll = this.getPoll.bind(this);
+		this.setUserName = this.setUserName.bind(this);
+		this.logout = this.logout.bind(this);
+		this.toggleModal = this.toggleModal.bind(this);
+		this.addPoll = this.addPoll.bind(this);
+		this.deletePoll = this.deletePoll.bind(this);
 	}
 
-	getPoll = id => {
+	getPoll(id) {
 		const stateCopy = [...this.state.polls];
 		return stateCopy.splice(id, 1);
-	};
-	setUserName = (field, name) => {
+	}
+	setUserName(field, name) {
 		this.setState({ [field]: name, showModal: false });
-	};
+	}
 
-	logout = () => {
+	logout() {
 		this.setState({ userName: "" });
 		history.push("/");
-	};
-	toggleModal = () => {
+	}
+	toggleModal() {
 		this.setState({ showModal: !this.state.showModal });
-	};
+	}
 
-	addPoll = (poll, id) => {
+	addPoll(poll, id) {
 		const polls = [...this.state.polls];
 		poll.owner = this.state.userName ? this.state.userName : "Anonymous";
 		if (id) {
@@ -68,14 +55,14 @@ class App extends Component {
 			history.push(`/poll/${polls.length - 1}`);
 		}
 		this.setState({ polls });
-	};
+	}
 
-	deletePoll = index => {
+	deletePoll(index) {
 		const polls = [...this.state.polls];
 		polls.splice(parseInt(index), 1);
 		this.setState({ polls });
 		history.push("/");
-	};
+	}
 
 	render() {
 		return (

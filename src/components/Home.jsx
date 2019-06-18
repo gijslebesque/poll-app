@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import Section from "./Section";
 
-const Home = () => {
+const Home = memo(() => {
 	return (
 		<Section title="Welcome">
 			<p>
@@ -16,6 +16,6 @@ const Home = () => {
 			</p>
 		</Section>
 	);
-};
+});
 
 export default Home;

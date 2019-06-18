@@ -8,8 +8,6 @@ const Notification = memo(({ type, text }) => {
 	const [showNotification, toggleNotification] = useState(true);
 
 	useEffect(() => {
-		console.log(notificationEl.current);
-
 		setTimeout(() => {
 			if (notificationEl.current) {
 				notificationEl.current.style = "transform: translateX(120%)";
