@@ -22,6 +22,10 @@ The assessment stated that a chart needs to be implemented for users to see the 
 
 In the project directory, you can run:
 
+### `npm install`
+
+Downloads all the necessary depencies for the project to run.
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
