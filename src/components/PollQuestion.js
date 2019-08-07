@@ -10,18 +10,17 @@ class PollQuestions extends Component {
     this.state = {
       checked: "",
       showEditModal: false,
-      userAnswers: [],
       style: {
         transform: "translate(100%)"
       },
       poll: {
         question: "",
-        answers: []
+        answers: [],
+        userAnswers: []
       }
     };
 
     this.mountStyle = this.mountStyle.bind(this);
-    this.unMountStyle = this.unMountStyle.bind(this);
 
     this.handleRadioBtn = this.handleRadioBtn.bind(this);
     this.vote = this.vote.bind(this);
@@ -42,8 +41,12 @@ class PollQuestions extends Component {
         params: { id }
       }
     } = this.props;
-
-    if (prevProps.match.params.id !== id) {
+    //prevProps.polls[id]
+    debugger;
+    if (
+      prevProps.match.params.id !== id ||
+      this.props.polls[id] !== prevProps.polls[id]
+    ) {
       this.showPoll();
     }
   }
@@ -58,28 +61,39 @@ class PollQuestions extends Component {
     });
   }
 
-  //   unMountStyle() {
-  //     // css for unmount animation
-  //     this.setState({
-  //       style: {
-  //         transform: "translate(100%)",
-  //         transition: "all 0.5s ease"
-  //       }
-  //     });
-  //   }
+  componentWillUnmount() {
+    debugger;
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+
+    this.props.updatePoll(this.state.poll, id);
+  }
 
   vote() {
-    const updatedUserAnswers = this.state.userAnswers.map((answer, i) => {
+    let updatedUserAnswers = this.state.poll.userAnswers.map((answer, i) => {
       if (i === this.state.checked) {
         answer.vote++;
       }
       return answer;
     });
-    this.setState({ userAnswers: updatedUserAnswers, checked: "" });
+    let poll = { ...this.state.poll };
+    poll.userAnswers = updatedUserAnswers;
+    this.setState({ poll, checked: "" });
   }
 
   reset() {
-    this.showPoll();
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+
+    let poll = { ...this.state.poll };
+    delete poll.userAnswers;
+    this.props.updatePoll(poll, id);
   }
 
   edit() {
@@ -90,6 +104,7 @@ class PollQuestions extends Component {
   }
 
   showPoll() {
+    debugger;
     const id = this.props.match.params.id;
     const polls = this.props.polls;
 
@@ -101,25 +116,22 @@ class PollQuestions extends Component {
       this.props.history.push("/");
       return;
     }
-
-    const userAnswers = poll[0].answers.map((answer, i) => {
-      return {
-        name: `Answer ${i + 1}`,
-        vote: 0
-      };
-    });
-
-    this.setState({ poll: poll[0], userAnswers });
+    if (!poll[0].userAnswers) {
+      poll[0].userAnswers = poll[0].answers.map((answer, i) => {
+        return {
+          name: `Answer ${i + 1}`,
+          vote: 0
+        };
+      });
+    }
+    debugger;
+    this.setState({ poll: poll[0] });
   }
 
   handleRadioBtn(e) {
     const indexBtn = parseInt(e.target.getAttribute("data-index"));
     this.setState({ checked: indexBtn });
   }
-
-  //   componentWillUnmount(){
-
-  //   }
 
   render() {
     const { poll } = this.state;
@@ -173,7 +185,7 @@ class PollQuestions extends Component {
               </Form>
             </div>
             <div className="column">
-              <PollAnswers userAnswers={this.state.userAnswers} />
+              <PollAnswers userAnswers={this.state.poll.userAnswers} />
             </div>
           </div>
         </Section>

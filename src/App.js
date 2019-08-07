@@ -27,6 +27,7 @@ class App extends Component {
     this.logout = this.logout.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.addPoll = this.addPoll.bind(this);
+    this.updatePoll = this.updatePoll.bind(this);
     this.deletePoll = this.deletePoll.bind(this);
     this.showNotAllowed = this.showNotAllowed.bind(this);
   }
@@ -52,7 +53,7 @@ class App extends Component {
   }
 
   addPoll(poll, id) {
-    const polls = [...this.state.polls];
+    let polls = [...this.state.polls];
     poll.owner = this.state.userName ? this.state.userName : "Anonymous";
     if (id) {
       polls[id] = poll;
@@ -64,6 +65,12 @@ class App extends Component {
     this.setState({ polls });
   }
 
+  updatePoll(poll, id) {
+    let polls = [...this.state.polls];
+    polls[id] = poll;
+    debugger;
+    this.setState({ polls });
+  }
   deletePoll(index) {
     const polls = [...this.state.polls];
     polls.splice(parseInt(index), 1);
@@ -115,6 +122,7 @@ class App extends Component {
                   render={props => (
                     <PollQuestion
                       {...props}
+                      updatePoll={this.updatePoll}
                       userName={this.state.userName}
                       polls={this.state.polls}
                     />
