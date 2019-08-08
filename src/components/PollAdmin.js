@@ -142,8 +142,10 @@ class PollAdmin extends Component {
     if (this.state.poll.answers.length < 2 || !this.state.poll.question) {
       this.showNotAllowed();
     } else {
+      const poll = { ...this.state.poll };
+      delete poll.userAnswers;
       const id = this.props.match.params.id;
-      this.props.addPoll(this.state.poll, id);
+      this.props.addPoll(poll, id);
     }
   }
 

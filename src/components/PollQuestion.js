@@ -98,8 +98,7 @@ class PollQuestions extends Component {
 
   edit() {
     this.props.history.push({
-      pathname: `/create-poll/${this.props.match.params.id}`,
-      poll: this.state.poll
+      pathname: `/create-poll/${this.props.match.params.id}`
     });
   }
 
